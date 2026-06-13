@@ -12,7 +12,7 @@ The system monitors Windows Firewall logs and triggers alerts when a suspicious 
 .Generate real-time alerts in Splunk
 .Simulate SOC (Security Operations Center) detection workflow
 ```
-# 🧪Lab Environment
+## 🧪Lab Environment
 ```
 Component	Details
 SIEM Tool	Splunk Enterprise
@@ -20,15 +20,16 @@ Target Machine	Windows (192.168.1.70)
 Attacker Machine	Kali Linux (192.168.1.71)
 Log Source	Windows Firewall Logs (pfirewall.log)
 ```
-⚔️ Attack Simulation
-
+## ⚔️Attack Simulation
+```
 A port scan was performed using Nmap from Kali Linux:
 
 nmap -Pn -p 1-1000 192.168.1.70
 
 This generates multiple connection attempts across different ports, simulating reconnaissance activity.
-
-🔍 Detection Logic (SPL Query)
+```
+## 🔍Detection Logic (SPL Query)
+```
 index=firewall src_ip!="127.0.0.1"
 | bucket _time span=1m
 | stats dc(dest_port) as unique_ports 
@@ -36,7 +37,8 @@ index=firewall src_ip!="127.0.0.1"
         count as attempts 
         by src_ip dest_ip _time
 | where unique_ports >= 5
-🚨 Alert Configuration
+```
+## 🚨Alert Configuration
 Alert Type: Real-time
 Trigger Condition: Number of Results > 0 (in 5 minutes)
 Suppression Rule: src_ip + dest_ip (60 seconds)
