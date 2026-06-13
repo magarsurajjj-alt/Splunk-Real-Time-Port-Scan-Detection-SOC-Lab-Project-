@@ -1,4 +1,3 @@
-<img width="1358" height="685" alt="Screenshot 2026-06-13 164120" src="https://github.com/user-attachments/assets/09cd9e2f-9c35-4716-ad42-703467195ecc" />
 # 🔥Splunk Real-Time Port Scan Detection (SOC Lab Project)
 ## 📌Overview
 
