@@ -6,10 +6,10 @@ This project demonstrates a real-time intrusion detection system using Splunk SI
 The system monitors Windows Firewall logs and triggers alerts when a suspicious number of ports are scanned from a single source IP.
 
 ## 🎯Objective
-Detect network reconnaissance activity
-Identify port scanning behavior (Nmap)
-Generate real-time alerts in Splunk
-Simulate SOC (Security Operations Center) detection workflow
+.Detect network reconnaissance activity
+.Identify port scanning behavior (Nmap)
+.Generate real-time alerts in Splunk
+.Simulate SOC (Security Operations Center) detection workflow
 🧪 Lab Environment
 Component	Details
 SIEM Tool	Splunk Enterprise
