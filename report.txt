@@ -1,0 +1,90 @@
+# 🔥 SECURITY INCIDENT REPORT  
+## Splunk Port Scan Detection (Post-Incident Analysis)
+
+---
+
+# 📌 1. Incident Overview
+
+A potential **port scanning activity** was detected in the internal network using Splunk SIEM. The activity originated from a Kali Linux machine targeting a Windows system.
+
+The behavior is consistent with **reconnaissance activity using Nmap scanning tools**.
+
+---
+
+# 🧾 2. Incident Details
+
+```text
+Incident Type: Port Scan / Network Reconnaissance
+Detection Tool: Splunk Enterprise
+Severity: Medium
+Status: Resolved (Lab Simulation)
+Detection Time: Real-time
+🧑‍💻 3. Affected Systems
+Attacker Host: 192.168.1.71 (Kali Linux)
+Target Host: 192.168.1.70 (Windows Machine)
+Log Source: Windows Firewall Logs (pfirewall.log)
+⚔️ 4. Attack Summary
+
+The attacker performed a TCP/UDP port scan against the target system using Nmap.
+
+Command used:
+nmap -Pn -p 1-1000 192.168.1.70
+Observed behavior:
+Multiple ports probed in short time
+Sequential scanning pattern
+High number of connection attempts
+Multiple destination ports accessed (135, 139, 445, 5432, 8000, 8089)
+🔍 5. Detection Method
+
+Splunk detected the activity using firewall log correlation and aggregation.
+
+SPL Query Used:
+index=firewall src_ip!="127.0.0.1"
+| bucket _time span=1m
+| stats dc(dest_port) as unique_ports 
+        values(dest_port) as scanned_ports 
+        count as attempts 
+        by src_ip dest_ip _time
+| where unique_ports >= 5
+Detection Logic:
+Groups traffic by source and destination IP
+Counts unique destination ports
+Flags behavior when threshold ≥ 5 ports within 1 minute
+🚨 6. Alert Trigger Information
+Alert Name: Real time port scan detected
+Trigger Condition: Number of Results > 0 (5 minute window)
+Alert Type: Real-time
+Suppression: src_ip + dest_ip (60 seconds)
+Severity: Medium
+📊 7. Findings
+Key Observations:
+✔ Source IP (192.168.1.71) performed scanning activity
+✔ Multiple destination ports were accessed
+✔ Activity matches known Nmap reconnaissance behavior
+✔ Internal network scan detected successfully
+✔ Alert triggered in near real-time
+🧠 8. MITRE ATT&CK Mapping
+Technique	ID	Description
+Network Service Discovery	T1046	Used for scanning open ports and services during reconnaissance phase
+🛡️ 9. Impact Assessment
+Impact Level: Low (Lab Environment)
+Risk: Reconnaissance activity detected early
+Confidentiality: Not compromised
+Integrity: Not affected
+Availability: Not affected
+🧯 10. Response Actions
+Alert successfully generated in Splunk
+Source IP identified and logged
+Activity monitored via firewall logs
+No escalation required (controlled lab simulation)
+📈 11. Conclusion
+
+The Splunk SIEM system successfully detected and logged port scanning activity in real time. The implemented detection rule effectively identified reconnaissance behavior with high accuracy.
+
+This demonstrates the effectiveness of SIEM-based monitoring in identifying early-stage cyber attacks.
+
+👨‍💻 12. Analyst
+
+Name: Suraj Magar
+Role: SOC / Cybersecurity Lab Analyst
+Focus: SIEM | Threat Detection | Blue Teaming
