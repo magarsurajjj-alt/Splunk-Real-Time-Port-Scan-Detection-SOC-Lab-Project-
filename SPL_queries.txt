@@ -1,0 +1,81 @@
+############################################################
+# 🔥 Real-Time Port Scan Detection (Nmap  Reconnaissance)
+# Splunk SIEM Lab Project
+############################################################
+
+
+############################################################
+# 1. BASIC PORT SCAN DETECTION (CORE QUERY)
+############################################################
+
+index=firewall src_ip!=127.0.0.1
+ bucket _time span=1m
+ stats dc(dest_port) as unique_ports 
+        values(dest_port) as scanned_ports 
+        count as attempts 
+        by src_ip dest_ip _time
+ where unique_ports = 5
+
+
+############################################################
+# 2. TOP SCANNING SOURCES
+############################################################
+
+index=firewall src_ip!=127.0.0.1
+ stats dc(dest_port) as unique_ports 
+        count as attempts 
+        by src_ip
+ sort - unique_ports
+
+
+############################################################
+# 3. TOP TARGETED HOSTS
+############################################################
+
+index=firewall
+ stats count by dest_ip
+ sort - count
+
+
+############################################################
+# 4. SUSPICIOUS SCAN ACTIVITY (HIGH FREQUENCY)
+############################################################
+
+index=firewall src_ip!=127.0.0.1
+ bucket _time span=1m
+ stats count as connection_attempts 
+        dc(dest_port) as unique_ports 
+        by src_ip dest_ip _time
+ where connection_attempts  50 OR unique_ports  5
+
+
+############################################################
+# 5. ATTACK TIMELINE (VISIBILITY)
+############################################################
+
+index=firewall src_ip!=127.0.0.1
+ timechart span=1m count by src_ip
+
+
+############################################################
+# 6. INTERNAL PORT SCAN ONLY (LAB USE CASE)
+############################################################
+
+index=firewall src_ip=192.168.1.
+ bucket _time span=1m
+ stats dc(dest_port) as unique_ports 
+        by src_ip dest_ip
+ where unique_ports = 5
+
+
+############################################################
+# 7. CLEAN VERSION FOR ALERT (BEST PRACTICE)
+############################################################
+
+index=firewall src_ip!=127.0.0.1
+ bucket _time span=1m
+ stats dc(dest_port) as unique_ports 
+        values(dest_port) as scanned_ports 
+        count as attempts 
+        by src_ip dest_ip
+ where unique_ports = 5
