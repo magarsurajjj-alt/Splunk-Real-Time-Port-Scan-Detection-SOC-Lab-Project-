@@ -39,13 +39,15 @@ index=firewall src_ip!="127.0.0.1"
 | where unique_ports >= 5
 ```
 ## 🚨Alert Configuration
+```
 Alert Type: Real-time
 Trigger Condition: Number of Results > 0 (in 5 minutes)
 Suppression Rule: src_ip + dest_ip (60 seconds)
 Severity: Medium
 Action: Email notification + Triggered Alerts
-📧 Sample Alert Output
-
+```
+## 📧Sample Alert Output
+```
 When triggered, the alert includes:
 
 Source IP: 192.168.1.71 (Attacker)
@@ -53,10 +55,13 @@ Destination IP: 192.168.1.70 (Target)
 Number of ports scanned: 5+
 Attempts: Multiple connection requests
 Detection type: Port Scan / Reconnaissance
-🧠 MITRE ATT&CK Mapping
+```
+## 🧠MITRE ATT&CK Mapping
+```
 Technique	ID	Description
 Network Service Discovery	T1046	Port scanning used for reconnaissance
-📸 Screenshots
+```
+## 📸Screenshots
 
 Add your Splunk screenshots here:
 
@@ -64,33 +69,29 @@ Alert configuration
 Triggered alert
 Search results dashboard
 Nmap scan execution
-📊 Key Features
+## 📊Key Features
+```
 ✔ Real-time port scan detection
 ✔ Windows firewall log monitoring
 ✔ Nmap attack simulation
 ✔ Automated email alerting
 ✔ Alert deduplication (throttling)
 ✔ SOC-style detection logic
-🔧 SPL Enhancements (Optional Improvements)
-
-You can improve detection with:
-
-Severity scoring based on number of ports scanned
-Time-based anomaly detection
-Multiple attacker correlation
-GeoIP enrichment (if external IPs used)
-🚀 Future Improvements
+```
+## 🚀Future Improvements
+```
 Splunk dashboard for attacker visualization
 Multi-stage attack detection (scan → brute force → exploit)
 Integration with Splunk Enterprise Security (ES)
 Slack / Discord alert integration
 Automated incident response workflow
-👨‍💻 Author
-
+```
+## 👨‍💻Author
+```
 Suraj Magar
 Cybersecurity / SOC Lab Project
 Focus: SIEM, Threat Detection, Blue Teaming
-
-📌 Note
+```
+## 📌Note
 
 This project is built for educational SOC simulation purposes using controlled lab environments.
