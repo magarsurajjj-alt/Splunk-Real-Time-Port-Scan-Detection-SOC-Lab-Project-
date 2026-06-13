@@ -1,3 +1,4 @@
+<img width="1358" height="685" alt="Screenshot 2026-06-13 164120" src="https://github.com/user-attachments/assets/09cd9e2f-9c35-4716-ad42-703467195ecc" />
 # 🔥Splunk Real-Time Port Scan Detection (SOC Lab Project)
 ## 📌Overview
 
@@ -62,13 +63,13 @@ Technique	ID	Description
 Network Service Discovery	T1046	Port scanning used for reconnaissance
 ```
 ## 📸Screenshots
+<img width="1358" height="685" alt="Screenshot 2026-06-13 164120" src="https://github.com/user-attachments/assets/f9bff785-bf87-4aef-85c6-4b890b01865e" />
+<img width="1363" height="682" alt="Screenshot 2026-06-13 162251" src="https://github.com/user-attachments/assets/b58777b0-f8b1-4581-af17-545c4879d59f" />
 
-Add your Splunk screenshots here:
 
-Alert configuration
-Triggered alert
-Search results dashboard
-Nmap scan execution
+<img width="1361" height="689" alt="Screenshot 2026-06-13 160830" src="https://github.com/user-attachments/assets/ec56d773-57b5-4ad3-ac6f-2f554b56b93b" />
+<img width="1278" height="752" alt="Screenshot 2026-06-13 142556" src="https://github.com/user-attachments/assets/495e9968-f393-418c-a2d4-7b5571eef299" />
+
 ## 📊Key Features
 ```
 ✔ Real-time port scan detection
